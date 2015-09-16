@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="Form01"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="jugador"
+                                  type="java.lang.String"/>
+        </form-bean>
+        <form-bean name="Form02"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="numero"
+                                  type="java.lang.String"/>
+        </form-bean>
+        <form-bean name="Form04"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="empleadono"
+                                  type="java.lang.String"/>
+        </form-bean>
+        <form-bean name="Form05ValidacionFormBean" 
+                   type="formularios.Form05ValidacionFormBean"/>
+        <form-bean name="Form06"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="equipo"
+                                  type="java.lang.String"/>
+        </form-bean> 
+        <form-bean name="Form07"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="deptno"
+                                  type="java.lang.String"/>
+        </form-bean> 
+        <form-bean name="Form09"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="numero"
+                                  type="java.lang.String"/>
+                   <form-property name="nombre"
+                                  type="java.lang.String"/>
+                   <form-property name="localidad"
+                                  type="java.lang.String"/>                                      
+        </form-bean>  
+
+        <form-bean name="Form10"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="apellido"
+                                  type="java.lang.String"/>
+        </form-bean>  
+        
+        <form-bean name="FormLogin"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="usuario"
+                        type="java.lang.String"/>
+                   <form-property name="password"
+                        type="java.lang.String"/>                   
+        </form-bean> 
+        
+         <form-bean name="Form11"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="usuario"
+                        type="java.lang.String"/>
+                   <form-property name="password"
+                        type="java.lang.String"/>                   
+        </form-bean>   
+        
+        <form-bean name="Form11EliminarSubordinados"
+                   type="org.apache.struts.action.DynaActionForm">
+                   <form-property name="idempleado"
+                        type="java.lang.String"/>
+        </form-bean>                   
+        
+       
+          
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="welcome"  path="/Welcome.do"/>
+        <forward name="correcto" path="/Web01RespuestaCorrecta.jsp"/>
+        <forward name="incorrecto" path="/Web01InformacionVistaControlador.jsp"/>
+        <forward name="forward02" path="/Web02NumeroDoble.jsp"/>
+        <forward name="forward04" path="/Web04BuscarEmpleado.jsp"/>
+        <forward name="forward06" path="/Web06EjemploPlugIn.jsp"/>
+        <forward name="forward07" path="/Web07Departamentos.jsp"/>
+        <forward name="forward09" path="/Web09InsertarDepartamento.jsp"/>
+        <forward name="forward10" path="/Web10EmpleadosRadio.jsp"/>
+        <forward name="zonaadministracion" path="/Administracion/seguridad.jsp"/>
+        <forward name="inicio" path="/inicio.jsp"/>
+        <forward name="loginempleados" path="/LoginEmpleado.jsp"/>
+        <forward name="accesoempleados" path="/SeguridadEmpleados/Subordinados.jsp"/>
+        <forward name="inicioempleados" path="/inicioempleados.jsp"/>
+        
+        
+    </global-forwards>
+
+    <action-mappings>
+        <action path="/Action11CerrarSesion" 
+                type="controladores.Action11CerrarSesion"/>
+        <action path="/Action11SeguridadEmpleados" 
+                type="controladores.Action11SeguridadEmpleados"
+                name="Form11"/>
+        
+        <action path="/Action11EliminarSubordinados" 
+                type="controladores.Action11EliminarSubordinados"
+                name="Form11EliminarSubordinados"
+                input="/Administracion/empleados.jsp"/>
+
+        
+        <action path="/ActionValidarUsuario" 
+                type="controladores.ActionValidarUsuario"
+                name="FormLogin"
+                input="/login.jsp"/>
+
+        <action path="/Action10EmpleadosRadio" 
+                type="controladores.Action10EmpleadosRadio"
+                name="Form10"/>
+        <action path="/Action09InsertarDepartamento" 
+                type="controladores.Action09InsertarDepartamento"
+                name="Form09"/>
+        <action path="/Action07Departamentos" 
+                type="controladores.Action07Departamentos"
+                name="Form07"/>
+        <action path="/Action06EjemploPlugIn" 
+                type="controladores.Action06EjemploPlugIn"
+                name="Form06"/>
+        <action path="/Action05ValidacionFormBean" 
+                type="controladores.Action05ValidacionFormBean"
+                name="Form05ValidacionFormBean"
+                input="/Web05ValidacionFormBean.jsp"/>
+        <action path="/Action04BuscarEmpleado" 
+                type="controladores.Action04BuscarEmpleado"
+                name="Form04"/>
+        <action path="/Action02InformacionControladorVista" 
+                type="controladores.Action02InformacionControladorVista"
+                name="Form02"/>
+        <action path="/Action01InformacionVistaControlador" 
+                type="controladores.Action01InformacionVistaControlador"
+                name="Form01"/>
+        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+    <plug-in className="plugins.PlugIn06Equipos"/>
+    <plug-in className="plugins.PlugIn07Departamentos"/>
+    <plug-in className="plugins.PlugIn10Empleados"/>
+</struts-config>
